@@ -17,10 +17,11 @@
             if (isset($_SESSION['sid']))
             {
         ?>
+            <a href="index.php">首页</a>
             <div>
                 <a href="user.php">
                     <?php
-                        echo $_SESSION['sid'];
+                        echo $_SESSION['user'];
                     ?>
                 </a>
                 <div id="usermenu">
@@ -57,54 +58,60 @@
             $row = $result->fetch_assoc();
     
             include 'closeMysql.php';
-    
-            echo "修改" . $row['account'] . "的密码";
         ?>
         
-        <form name="input" action="user.php?func=2" method="post">
-            <div>
-                当前密码:
-                <input type="password" name="pswdOld" />
-            </div>
-            
-            <div>
-                新密码:
-                <input type="password" name="pswd" />
-            </div>
-            
-            <div>
-                确认新密码:
-                <input type="password" name="pswdConfirm" />
-            </div>
-            
-            <input class="submit" type="submit" name="submit" value="确  认" />
-        </form>
-        
-        <script type="text/javascript">
-            <?php
-                if (isset($_POST['submit']))
+        <?php
+            if (isset($_POST['submit']))
+            {
+                if (md5($row['account'] . $_POST['pswdOld'] . $row['salt']) == $row['password'])
                 {
-                    if (md5($row['account'] . $_POST['pswdOld'] . $row['salt']) == $row['password'])
-                    {
-                        include 'useMysql.php';
+                    include 'useMysql.php';
+                
+                    $salt = date('Y-m-d H:i:s');
+                    $md5pswd = md5($row['account'] . $_POST['pswd'] . $salt);
+                    $sql = "UPDATE user SET password = '{$md5pswd}', salt = '{$salt}' WHERE sid = '{$_SESSION['sid']}'";
+                    $db->query($sql);
+                
+                    include 'closeMysql.php';
                     
-                        $salt = date('Y-m-d H:i:s');
-                        $md5pswd = md5($row['account'] . $_POST['pswd'] . $salt);
-                        $sql = "UPDATE user SET password = '{$md5pswd}', salt = '{$salt}' WHERE sid = '{$_SESSION['sid']}'";
-//                        echo $sql;
-                        $db->query($sql);
-                    
-                        include 'closeMysql.php';
-                        
-                        echo "alert('修改成功！');";
-                    }
-                    else
-                    {
-                        echo "alert('当前密码错误！');";
-                    }
+                    echo "<div>恭喜您，修改成功！</div>";
                 }
-            ?>
-        </script>
+                else
+                {
+                    $change_error = 1;
+                }
+            }
+            
+            if (!isset($_POST['submit']) || isset($change_error))
+            {
+                echo "修改" . $row['account'] . "的密码";
+        ?>
+    
+            <form name="input" action="user.php?func=2" method="post">
+                <div>
+                    当前密码:
+                    <input type="password" name="pswdOld" />
+                </div>
+                
+                <div>
+                    新密码:
+                    <input type="password" name="pswd" />
+                </div>
+                
+                <div>
+                    确认新密码:
+                    <input type="password" name="pswdConfirm" />
+                </div>
+                
+                <input class="submit" type="submit" name="submit" value="确  认" />
+            </form>
+        <?php
+            }
+            if (isset($change_error))
+            {
+                echo '<div>当前密码错误！</div>';
+            }
+        ?>
     <?php
         }
         else
@@ -122,24 +129,29 @@
             echo $row['account'] . "的帐号";
         ?>
         
-        <div class="info">
-            ID : <?php echo $row['sid'] ?>
-        </div>
-        
-        <div class="info">
-            真实姓名 : <?php echo $row['sname'] ?>
-        </div>
-        
-        <div class="info">
-            E-mail : <?php echo $row['emailadd'] ?>
-        </div>
-        
-        <div class="info">
-            已借书数 : 
-            <a href="">
-               <?php echo $row['bbn'] ?>
-            </a>
-        </div>
+<!--        <form name="change" action="" method="post">-->
+            <div class="info">
+                ID : <?php echo $row['sid'] ?>
+            </div>
+            
+            <div class="info">
+                真实姓名 : <?php echo $row['sname'] ?>
+<!--                <input type="text" name="realname" />-->
+            </div>
+            
+            <div class="info">
+                E-mail : <?php echo $row['emailadd'] ?>
+<!--                <input type="text" name="email" />-->
+            </div>
+            
+            <div class="info">
+                已借书数 : 
+                <a href="">
+                   <?php echo $row['bbn'] ?>
+                </a>
+            </div>
+<!--            <input class="change" type="submit" name="change" value="确认修改" />-->
+<!--        </form>-->
     <?php
         }
     ?>

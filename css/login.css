@@ -1,0 +1,83 @@
+body
+{
+    background-image: url("../images/wiscom_03.jpg");
+}
+
+.middle
+{
+    width: 1000px;
+    height: 600px;
+    margin-top: 45px;
+}
+
+.middle_top
+{
+    width: 100%;
+    height: 159px;
+}
+
+.middle_top_left
+{
+    width: 600px;
+    float: left;
+}
+
+.middle_top_right
+{
+    width: 400px;
+    float: right;
+    padding-top: 71px;
+}
+
+.middle_mid
+{
+    width: 100%;
+    height: 305px;
+}
+
+.middle_mid_1
+{
+    width: 252px;
+    float: left;
+}
+
+.middle_mid_2
+{
+    width: 348px;
+    float: left;
+}
+
+.middle_mid_3
+{
+    width: 370px;
+    height: 100%;
+    float: left;
+    background-image: url("../images/wiscom_091.jpg");
+}
+
+.middle_mid_4
+{
+    width: 30px;
+    float: left;
+}
+
+.user_input, .pswd_input
+{
+    font-size: 16px;
+    width: 163px;
+    height: 20px;
+    background-color: #cfebff;
+    border: 1px solid #01233f;
+    margin-left: 171px;
+    vertical-align: middle;
+}
+
+.user_input
+{
+    margin-top: 29px;
+}
+
+.pswd_input
+{
+    margin-top: 12px;
+}

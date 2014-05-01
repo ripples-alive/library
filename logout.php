@@ -36,6 +36,7 @@
             if (isset($_SESSION['sid']))
             {
                 unset($_SESSION['sid']);
+                unset($_SESSION['user']);
                 echo "已退出登陆！";
             }
             else

@@ -90,6 +90,7 @@
                 $result = $db->query($sql);
                 $row = $result->fetch_assoc();
                 $_SESSION['sid'] = $row['sid'];
+                $_SESSION['user'] = $username;
         ?>
             <div>
                 登陆成功!

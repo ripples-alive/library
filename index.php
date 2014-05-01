@@ -20,7 +20,7 @@
             <div>
                 <a href="user.php">
                     <?php
-                        echo $_SESSION['sid'];
+                        echo $_SESSION['user'];
                     ?>
                 </a>
                 <div id="usermenu">
