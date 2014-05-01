@@ -1,0 +1,108 @@
+*
+{
+    margin: 0px auto;
+    padding: 0px;
+}
+
+.clear
+{
+    clear: both;
+    height: 0px;
+}
+
+
+
+.login, .register
+{
+    width: 300px;
+    text-align: center;
+    border: 1px solid gray;
+    margin-top: 200px;
+}
+
+.register
+{
+    margin-top: 150px;
+}
+
+.login_div, .register_div
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.login input.submit, .register input.submit
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: 30px;
+    width: 80px;
+}
+
+.login_error, .register_error
+{
+    font-size: 12px;
+    color: red;
+}
+
+
+
+.top
+{
+    height: 20px;
+    width: 100%;
+    background-color: #EEEEEE;
+}
+
+.top >a
+{
+    height: 12px;
+    width: 50px;
+    margin-top: 4px;
+    text-decoration: underline;
+    font-size: 12px;
+    color: blue;
+    float: right;
+}
+
+.top >div
+{
+    height: 12px;
+    width: 50px;
+    margin-top: 4px;
+    float: right;
+}
+
+.top >div >a
+{
+    height: 12px;
+    width: 100%;
+    margin-top: 4px;
+    text-decoration: underline;
+    font-size: 12px;
+    color: blue;
+}
+
+.top >div:hover div#usermenu
+{
+    display: block;
+}
+
+div#usermenu
+{
+/*    margin-top: 1px;*/
+    border: 1px solid gray;
+    display: none;
+}
+
+div#usermenu >a
+{
+    text-decoration: none;
+    font-size: 12px;
+    display: block;
+}
+
+div#usermenu >a:hover
+{
+    background-color: #EEEEEE;
+}
