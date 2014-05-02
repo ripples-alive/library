@@ -19,7 +19,7 @@ create table User
     SName varchar(8),
     EmailAdd varchar(30),
     BBN int, #已借书数
-    Level int,
+    Level int not null,
     primary key (SID),
     foreign key (Level) references Power(Level)
 );
@@ -41,12 +41,13 @@ create table Book
     primary key (BID)
 );
 
+#假设一个人不会在同一时间借多本相同的书
 drop table UBB;
 create table UBB
 (
     SID char(5) not null,
     BID varchar(18) not null,
-    Renew int,
+    Renew int not null default 0,
     Deadline date,
     primary key (SID, BID),
     foreign key (SID) references User(SID),
@@ -70,7 +71,7 @@ create table History
 (
     SID char(5) not null,
     BID varchar(18) not null,
-    LentTime date,
+    LentTime date not null,
     ReturnTime date,
     primary key (SID, BID, LentTime),
     foreign key (SID) references User(SID),

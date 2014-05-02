@@ -12,38 +12,9 @@
 </head>
     
 <body>
-    <div class="top">
-        <?php
-            if (isset($_SESSION['sid']))
-            {
-        ?>
-            <div>
-                <a href="user.php">
-                    <?php
-                        echo $_SESSION['user'];
-                    ?>
-                </a>
-                <div id="usermenu">
-                    <a href="user.php?func=1">
-                        个人中心
-                    </a>
-                    <a href="user.php?func=2">
-                        修改密码
-                    </a>
-                    <a href="logout.php">登 出</a>
-                </div>
-            </div>
-        <?php
-            }
-            else
-            {
-        ?>
-            <a href="register.php">注 册</a>
-            <a href="login.php">登 陆</a>
-        <?php
-            }
-        ?>
-    </div>
+    <?php
+        include "top.php";
+    ?>
     
     <div class="search">
         <form name="search" action="index.php" method="post">
