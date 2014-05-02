@@ -1,0 +1,88 @@
+body
+{
+    background-image: url("../images/wiscom_03.jpg");
+}
+
+.middle
+{
+    width: 1000px;
+    height: 600px;
+    margin-top: 45px;
+}
+
+.middle_left
+{
+    width: 600px;
+    float: left;
+}
+
+.middle_mid
+{
+    margin-top: 71px;
+    height: 100%;
+    width: 370px;
+    float: left;
+}
+
+.middle_mid_down
+{
+    background-image: url("../images/bg_03.jpg");
+    height: 305px;
+}
+
+.middle_right
+{
+    height: 172px;
+    width: 30px;
+    float: left;
+    margin-top: 159px;
+}
+
+.user_input, .pswd_input, .name_input, .mail_input
+{
+    font-size: 16px;
+    width: 183px;
+    height: 20px;
+    background-color: #cfebff;
+    border: 1px solid #01233f;
+    margin-left: 141px;
+    vertical-align: middle;
+}
+
+.user_input
+{
+    margin-top: 22px;
+}
+
+.pswd_input, .name_input, .mail_input
+{
+    margin-top: 6px;
+}
+
+.register_error
+{
+    font-size: 14px;
+    height: 20px;
+/*    width: 100px;*/
+    margin-left: 170px;
+    margin-top: 10px;
+}
+
+.submit
+{
+    margin-top: 28px;
+    margin-left: 171px;
+    background-image: url("../images/wiscom_login.jpg");
+    height: 28px;
+    width: 114px;
+    border: none;
+}
+
+.hint
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #02336c;
+    margin-left: 120px;
+    margin-top: 20px;
+}

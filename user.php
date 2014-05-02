@@ -61,7 +61,7 @@
         ?>
         
         <?php
-            if (isset($_POST['submit']))
+            if (isset($_POST['submitChange']))
             {
                 if (md5($row['account'] . $_POST['pswdOld'] . $row['salt']) == $row['password'])
                 {
@@ -82,7 +82,7 @@
                 }
             }
             
-            if (!isset($_POST['submit']) || isset($change_error))
+            if (!isset($_POST['submitChange']) || isset($change_error))
             {
                 echo "修改" . $row['account'] . "的密码";
         ?>
@@ -103,7 +103,7 @@
                     <input type="password" name="pswdConfirm" />
                 </div>
                 
-                <input class="submit" type="submit" name="submit" value="确  认" />
+                <input class="submit" type="submit" name="submitChange" value="确  认" />
             </form>
         <?php
             }

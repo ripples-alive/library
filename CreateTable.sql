@@ -4,7 +4,7 @@ create table Power
     Level int not null,
     CBN int, #能借书数
     TLW int, #借阅期限权值
-    cnt int,
+    Cnt int,
     primary key (Level)
 );
 
@@ -61,6 +61,18 @@ create table UCB
     Time datetime not null,
     Content varchar(512),
     primary key (SID, BID, Time),
+    foreign key (SID) references User(SID),
+    foreign key (BID) references Book(BID)
+);
+
+drop table History;
+create table History
+(
+    SID char(5) not null,
+    BID varchar(18) not null,
+    LentTime date,
+    ReturnTime date,
+    primary key (SID, BID, LentTime),
     foreign key (SID) references User(SID),
     foreign key (BID) references Book(BID)
 );

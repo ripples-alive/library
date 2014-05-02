@@ -81,3 +81,30 @@ body
 {
     margin-top: 12px;
 }
+
+.middle_submit
+{
+    margin-top: 32px;
+    margin-left: 171px;
+    background-image: url("../images/wiscom_login.jpg");
+    height: 28px;
+    width: 114px;
+    border: none;
+}
+
+.login_error
+{
+    font-size: 14px;
+    height: 20px;
+    margin-left: 130px;
+    margin-top: 10px;
+}
+
+.hint
+{
+    font-size: 16px;
+    font-weight: bold;
+    color: #02336c;
+    margin-left: 120px;
+    margin-top: 40px;
+}

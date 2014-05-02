@@ -34,7 +34,7 @@
     </script>
     
     <?php
-        if (isset($_POST['submit']))
+        if (isset($_POST['submitLogin']))
         {
     ?>
         <script type="text/javascript">
@@ -63,10 +63,7 @@
 
 <body>
     <?php
-            echo $_POST['submit'];
-            echo $_POST['user'];
-            echo $_POST['pswd'];
-        if (isset($_POST['submit']))
+        if (isset($_POST['submitLogin']))
         {
     ?>
         <?php 
@@ -84,16 +81,18 @@
                 $_SESSION['sid'] = $row['sid'];
                 $_SESSION['user'] = $username;
         ?>
-            <div>
-                登陆成功!
-            </div>
-            
-            <div>
-                <span id="time">
-                </span>
-                <span>
-                    秒后自动跳转到登陆前页面!
-                </span>
+            <div class="login_hint">
+                <div>
+                    登陆成功!
+                </div>
+                
+                <div>
+                    <span id="time">
+                    </span>
+                    <span>
+                        秒后自动跳转到登陆前页面!
+                    </span>
+                </div>
             </div>
         <?php
             }
@@ -109,7 +108,7 @@
     ?>
         
     <?php
-        if (!isset($_POST['submit']) || isset($login_error))
+        if (!isset($_POST['submitLogin']) || isset($login_error))
         {
     ?>
         <div class="middle">
@@ -133,41 +132,38 @@
                         <input class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
                         <input class="pswd_input" type="password" id="pswd" name="pswd" />
                         
-<!--
-                        <?php
-                            if (isset($login_error))
-                            {
-                        ?>
-                            <div class="login_error">
+                        <div class="login_error">
+                            <?php
+                                if (isset($login_error))
+                                {
+                            ?>
                                 帐号或密码错误
-                            </div>
-                            
-                            <script type="text/javascript">
-                                this.pswd.focus();
-                            </script>
-                        <?php
-                            }
-                        ?>
--->
+                                
+                                <script type="text/javascript">
+                                    this.pswd.focus();
+                                </script>
+                            <?php
+                                }
+                            ?>
+                        </div>
                         
-<!--                        <input class="submit" type="submit" name="submit" value="登  陆" />-->
-<!--                        <input type="button" name="submit" value="submit" />-->
+                        <input class="middle_submit" type="submit" name="submitLogin" value="" />
+<!--
+                        <input type="text" name="submitLogin" value="submit" style="display:none" />
                         <script type="text/javascript">
                             function defaultSubmit()
                             {
                                 with (document.getElementById("login_form"))
                                 {
-                                        alert(document.getElementById("login_form").submit());
                                     if (onsubmit())
                                     {
-                                        action = "login.php";
-                                        method = "post";
                                         submit();
                                     }
                                 }
                             }
                         </script>
-                        <img src="images/wiscom_login.jpg" onclick="defaultSubmit()" />
+                        <img class="middle_submit" src="images/wiscom_login.jpg" onclick="defaultSubmit()" />
+-->
                         
                         <div class="hint">
                             没有帐号?
@@ -181,45 +177,6 @@
                     <img src="images/wiscom_10.jpg" />
                 </div>
             </div>
-<!--
-            <div class="login">
-                <form name="input" action="login.php" onsubmit="return formValid(this)" method="post">
-                    <div class="login_div">
-                        Username:
-                        <input type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
-                    </div>
-                    
-                    <div class="login_div">
-                        Password:
-                        <input type="password" id="pswd" name="pswd" />
-                    </div>
-                    
-                    <?php
-                        if (isset($login_error))
-                        {
-                    ?>
-                        <div class="login_error">
-                            帐号或密码错误
-                        </div>
-                        
-                        <script type="text/javascript">
-                            this.pswd.focus();
-                        </script>
-                    <?php
-                        }
-                    ?>
-                    
-                    <input class="submit" type="submit" name="submit" value="登  陆" />
-                    
-                    <div class="hint">
-                        没有帐号?
-                        <a href="register.php">
-                            注册
-                        </a>
-                    </div>
-                </form>
-            </div>
--->
         </div>
     <?php
         }

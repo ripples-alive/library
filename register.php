@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>图书管理系统</title>
     <link href="css/library.css" rel="stylesheet" type="text/css" />
+    <link href="css/register.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/library.js"></script>
     <script type="text/javascript">
         function formValid(form)
@@ -33,7 +34,7 @@
     </script>
     
     <?php
-        if (isset($_POST['submit']))
+        if (isset($_POST['submitRegister']))
         {
     ?>
         <script type="text/javascript">
@@ -62,7 +63,7 @@
 
 <body>
     <?php
-        if (isset($_POST['submit']))
+        if (isset($_POST['submitRegister']))
         {
     ?>
         <?php
@@ -92,16 +93,18 @@
                 $_SESSION['sid'] = $row['sid'];
                 $_SESSION['user'] = $username;
         ?>
-            <div>
-                登陆成功!
-            </div>
-            
-            <div>
-                <span id="time">
-                </span>
-                <span>
-                    秒后自动跳转到登陆前页面!
-                </span>
+            <div class="register_hint">
+                <div>
+                    登陆成功!
+                </div>
+                
+                <div>
+                    <span id="time">
+                    </span>
+                    <span>
+                        秒后自动跳转到登陆前页面!
+                    </span>
+                </div>
             </div>
         <?php
             }
@@ -117,63 +120,54 @@
     ?>
     
     <?php
-        if (!isset($_POST['submit']) || isset($login_error))
+        if (!isset($_POST['submitRegister']) || isset($login_error))
         {
     ?>
-        <div class="register">
-            <div>
-                欢迎加入图书馆!
+        <div class="middle">
+            <div class="middle_left">
+                <img src="images/bg_01.gif" />
             </div>
-            <form name="register" action="register.php" onsubmit="return formValid(this)" method="post">
-                <div class="register_div">
-                    用户名：
-                    <input type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
+            <div class="middle_mid">
+                <div class="middle_mid_up">
+                    <img src="images/wiscom_05.jpg" />
                 </div>
-                
-                <div class="register_div">
-                    密码:
-                    <input type="password" id="pswd" name="pswd" />
+                <div class="middle_mid_down">
+                    <form name="register" action="register.php" onsubmit="return formValid(this)" method="post">
+                        <input class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
+                        <input class="pswd_input" type="password" id="pswd" name="pswd" />
+                        <input class="pswd_input" type="password" id="pswdConfirm" name="pswdConfirm" />
+                        <input class="name_input" type="text" id="realname" name="realname" />
+                        <input class="mail_input" type="text" id="email" name="email" />
+                        
+                        <div class="register_error">
+                            <?php
+                                if (isset($login_error))
+                                {
+                            ?>
+                                注册失败
+                                
+                                <script type="text/javascript">
+                                    this.pswd.focus();
+                                </script>
+                            <?php
+                                }
+                            ?>
+                        </div>
+                        
+                        <input type="submit" class="submit" name="submitRegister" value="" />
+                        
+                        <div class="hint">
+                            已有帐号?
+                            <a href="login.php">
+                                登陆
+                            </a>
+                        </div>
+                    </form>
                 </div>
-                
-                <div class="register_div">
-                    确认密码:
-                    <input type="password" id="pswdConfirm" name="pswdConfirm" />
-                </div>
-                
-                <div class="register_div">
-                    真实姓名:
-                    <input type="text" id="realname" name="realname" />
-                </div>
-                
-                <div class="register_div">
-                    邮箱:
-                    <input type="text" id="email" name="email" />
-                </div>
-                
-                <?php
-                    if (isset($login_error))
-                    {
-                ?>
-                    <div class="register_error">
-                        注册失败
-                    </div>
-                    
-                    <script type="text/javascript">
-                        this.pswd.focus();
-                    </script>
-                <?php
-                    }
-                ?>
-                
-                <input type="submit" class="submit" name="submit" value="注  册" />
-                
-                <div class="hint">
-                    已有帐号?
-                    <a href="login.php">
-                        登陆
-                    </a>
-                </div>
-            </form>
+            </div>
+            <div class="middle_right">
+                <img src="images/wiscom_10.jpg" />
+            </div>
         </div>
     <?php
         }
