@@ -113,7 +113,7 @@ div#usermenu >a:hover
     background-color: #EEEEEE;
 }
 
-.login_hint, .register_hint
+.login_hint, .register_hint, .logout_hint
 {
     margin-top: 200px;
     color: #02336c;

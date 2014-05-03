@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
     session_start();
 ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -84,6 +84,75 @@
         ?>
     <?php
         }
+        else if (isset($_GET['func']) && ($_GET['func'] == 3))
+        {
+    ?>
+        <?php
+            include 'useMysql.php';
+            
+            if (isset($_GET['bid']))
+            {
+                $sql = "SELECT renew, cbtime, tlw FROM user NATURAL JOIN power NATURAL JOIN ubb NATURAL JOIN book WHERE sid = '{$_SESSION['sid']}' AND bid = '{$_GET['bid']}'";
+                $result = $db->query($sql);
+                $row = $result->fetch_assoc();
+                
+                if ($row['renew'] == 0)
+                {
+                    $sql = "UPDATE ubb SET renew = 1, deadline = '" . date('Y-m-d', strtotime('+'. $row['cbtime'] * $row['tlw'] . ' day')) . "' WHERE sid = '{$_SESSION['sid']}' AND bid = '{$_GET['bid']}'";
+                    $db->query($sql);
+                    echo "<script type='text/javascript'>alert('续借成功！');</script>";
+                }
+                else
+                {
+                    echo "<script type='text/javascript'>alert('已续借过！');</script>";
+                }
+            }
+            
+            $sql = "SELECT bid, bname, author, publisher, pubtime, type, renew, deadline FROM ubb NATURAL JOIN book WHERE sid = '{$_SESSION['sid']}'";
+            $result = $db->query($sql);
+        ?>
+            <table>
+                <tr>
+                    <th>书号</th>
+                    <th>书名</th>
+                    <th>作者</th>
+                    <th>出版社</th>
+                    <th>出版时间</th>
+                    <th>分类</th>
+                    <th>应还时间</th>
+                    <th>续借</th>
+                </tr>
+        <?php
+            while ($row = $result->fetch_assoc())
+            {
+        ?>
+                <tr>
+                    <td><?php echo $row['bid']; ?></td>
+                    <td><?php echo $row['bname']; ?></td>
+                    <td><?php echo $row['author']; ?></td>
+                    <td><?php echo $row['publisher']; ?></td>
+                    <td><?php echo $row['pubtime']; ?></td>
+                    <td><?php echo $row['type']; ?></td>
+                    <td><?php echo $row['deadline']; ?></td>
+                    <td>
+                        <?php
+                            if ($row['renew'] == 0)
+                            {
+                                echo "<a href='user.php?func=3&bid={$row['bid']}'>续借</a>";
+                            }
+                            else
+                            {
+                                echo "已续借过！";
+                            }
+                        ?>
+                    </td>
+                </tr>
+        <?php
+            }
+            echo "</table>";
+        ?>
+    <?php
+        }
         else
         {
     ?>
@@ -116,7 +185,7 @@
             
             <div class="info">
                 已借书数 : 
-                <a href="">
+                <a href="user.php?func=3">
                    <?php echo $row['bbn'] ?>
                 </a>
             </div>

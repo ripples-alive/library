@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
     session_start();
 ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,7 +61,7 @@
     ?>
 </head>
 
-<body>
+<body onload="document.getElementById('user_input').focus()">
     <?php
         if (isset($_POST['submitLogin']))
         {
@@ -72,14 +72,17 @@
         
             include 'useMySQL.php';
         
-            $sql = "SELECT sid, password, salt FROM user WHERE account = '{$username}'";
+            $sql = "SELECT sid, password, salt, level, titledate FROM user WHERE account = '{$username}'";
             $result = $db->query($sql);
             $row = $result->fetch_assoc();
             $md5pswd = md5($username . $password . $row['salt']);
             if ($row['password'] == $md5pswd)
             {
-                $_SESSION['sid'] = $row['sid'];
-                $_SESSION['user'] = $username;
+                if (($row['titledate'] == null) || ($row['titledate'] < date('Y-m-d h:i:s')))
+                {
+                    $_SESSION['sid'] = $row['sid'];
+                    $_SESSION['user'] = $username;
+                    $_SESSION['level'] = $row['level'];
         ?>
             <div class="login_hint">
                 <div>
@@ -95,6 +98,11 @@
                 </div>
             </div>
         <?php
+                }
+                else
+                {
+                    $login_error = 2;
+                }
             }
             else
             {
@@ -129,16 +137,22 @@
                 </div>
                 <div class="middle_mid_3">
                     <form id="login_form" name="input" action="login.php" onsubmit="return formValid(this)" method="post">
-                        <input class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
+                        <input id="user_input" class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
                         <input class="pswd_input" type="password" id="pswd" name="pswd" />
                         
                         <div class="login_error">
                             <?php
                                 if (isset($login_error))
                                 {
+                                    if ($login_error == 1)
+                                    {
+                                        echo '帐号或密码错误';
+                                    }
+                                    else
+                                    {
+                                        echo '该帐号已被封号！';
+                                    }
                             ?>
-                                帐号或密码错误
-                                
                                 <script type="text/javascript">
                                     this.pswd.focus();
                                 </script>

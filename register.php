@@ -1,8 +1,8 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <?php
     session_start();
 ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -61,7 +61,7 @@
     ?>
 </head>
 
-<body>
+<body onload="document.getElementById('user_input').focus()">
     <?php
         if (isset($_POST['submitRegister']))
         {
@@ -87,11 +87,12 @@
                 $sql = "INSERT INTO user VALUES ({$sql}, '{$username}', '{$md5pswd}', '{$salt}', null, '{$_POST['realname']}', '{$_POST['email']}', 0, 0)";
                 $db->query($sql);
                 
-                $sql = "SELECT sid FROM user WHERE account = '{$username}'";
+                $sql = "SELECT sid, level FROM user WHERE account = '{$username}'";
                 $result = $db->query($sql);
                 $row = $result->fetch_assoc();
                 $_SESSION['sid'] = $row['sid'];
                 $_SESSION['user'] = $username;
+                $_SESSION['level'] = $row['level'];
         ?>
             <div class="register_hint">
                 <div>
@@ -133,7 +134,7 @@
                 </div>
                 <div class="middle_mid_down">
                     <form name="register" action="register.php" onsubmit="return formValid(this)" method="post">
-                        <input class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
+                        <input id="user_input" class="user_input" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />
                         <input class="pswd_input" type="password" id="pswd" name="pswd" />
                         <input class="pswd_input" type="password" id="pswdConfirm" name="pswdConfirm" />
                         <input class="name_input" type="text" id="realname" name="realname" />

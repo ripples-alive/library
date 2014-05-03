@@ -14,7 +14,7 @@ create table User
     SID char(5) not null,
     Account varchar(20) not null,
     Password char(32) not null,
-    Seed datetime not null,
+    Salt datetime not null,
     TitleDate datetime, #封号截止时间
     SName varchar(8),
     EmailAdd varchar(30),
@@ -66,6 +66,7 @@ create table UCB
     foreign key (BID) references Book(BID)
 );
 
+#一天内多次借还同一本书只记一次记录
 drop table History;
 create table History
 (
