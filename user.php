@@ -54,26 +54,26 @@
             
             if (!isset($_POST['submitChange']) || isset($change_error))
             {
-                echo "修改" . $row['account'] . "的密码";
         ?>
     
-            <form name="input" action="user.php?func=2" method="post">
-                <div>
-                    当前密码:
-                    <input type="password" name="pswdOld" />
+            <form class="all" name="input" action="user.php?func=2" method="post">
+                <h3>修改<?php echo $row['account']; ?>的密码</h3>
+                <div class="union midunion">
+                    <div class="describe middes">当前密码：</div>
+                    <input class="input mid" type="password" name="pswdOld" />
                 </div>
                 
-                <div>
-                    新密码:
-                    <input type="password" name="pswd" />
+                <div class="union midunion">
+                    <div class="describe middes">新密码：</div>
+                    <input class="input mid" type="password" name="pswd" />
                 </div>
                 
-                <div>
-                    确认新密码:
-                    <input type="password" name="pswdConfirm" />
+                <div class="union midunion">
+                    <div class="describe middes">确认新密码：</div>
+                    <input class="input mid" type="password" name="pswdConfirm" />
                 </div>
                 
-                <input class="submit" type="submit" name="submitChange" value="确  认" />
+                <input class="button submit" type="submit" name="submitChange" value="确  认" />
             </form>
         <?php
             }
@@ -156,41 +156,50 @@
         else
         {
     ?>
-        <?php
-            include 'useMysql.php';
-            
-            $sql = "SELECT sid, account, sname, emailadd, bbn, level FROM user WHERE sid = '{$_SESSION['sid']}'";
-            $result = $db->query($sql);
-            $row = $result->fetch_assoc();
-    
-            include 'closeMysql.php';
-    
-            echo $row['account'] . "的帐号";
-        ?>
+        <div class="all">
+            <?php
+                include 'useMysql.php';
+                
+                $sql = "SELECT sid, account, sname, emailadd, bbn, level FROM user WHERE sid = '{$_SESSION['sid']}'";
+                $result = $db->query($sql);
+                $row = $result->fetch_assoc();
+        
+                include 'closeMysql.php';
+        
+                echo $row['account'] . "的帐号";
+            ?>
         
 <!--        <form name="change" action="" method="post">-->
             <div class="info">
-                ID : <?php echo $row['sid'] ?>
+                ID : <?php echo $row['sid']; ?>
             </div>
             
             <div class="info">
-                真实姓名 : <?php echo $row['sname'] ?>
+                真实姓名 : <?php echo $row['sname']; ?>
 <!--                <input type="text" name="realname" />-->
             </div>
             
             <div class="info">
-                E-mail : <?php echo $row['emailadd'] ?>
+                E-mail : <?php echo $row['emailadd']; ?>
 <!--                <input type="text" name="email" />-->
             </div>
             
             <div class="info">
                 已借书数 : 
-                <a href="user.php?func=3">
-                   <?php echo $row['bbn'] ?>
-                </a>
+               <?php
+                    if ($row['bbn'] > 0)
+                    {
+                        echo '<a href="user.php?func=3">' . $row['bbn'] . '</a>';
+                    }
+                    else
+                    {
+                        echo $row['bbn'];
+                    }
+                ?>
             </div>
 <!--            <input class="change" type="submit" name="change" value="确认修改" />-->
 <!--        </form>-->
+        </div>
     <?php
         }
     ?>

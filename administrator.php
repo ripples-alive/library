@@ -23,19 +23,19 @@
         }
     ?>
     
-    <div>
+    <div class="all">
         <form name="titleForm" action="administrator.php" method="post">
-            <div>
-                被封号者编号：
-                <input type="text" name="sid" />
+            <div class="union">
+                <div class="describe">被封号者编号：</div>
+                <input class="input short" type="text" name="sid" />
             </div>
-            <div>
-                封号时间：
-                <input type="text" name="titletime" />
+            <div class="union">
+                <div class="describe">封号时间：</div>
+                <input class="input short titletime" type="text" name="titletime" />
                 天
             </div>
-            <input type="submit" name="title" value="封  号" />
-            <input type="submit" name="untitle" value="解  封" />
+            <input class="button double" type="submit" name="title" value="封  号" />
+            <input class="button double" type="submit" name="untitle" value="解  封" />
         </form>
     </div>
     

@@ -6,6 +6,7 @@
 
 body
 {
+    text-align: center;
     background-image: url("../images/wiscom_03.jpg");
 }
 
@@ -54,38 +55,38 @@ body
 
 .top
 {
-    height: 20px;
+    height: 25px;
     width: 100%;
-    background-color: #EEEEEE;
+    background-color: rgb(253,236,219);
     text-align: center;
 }
 
 .top >a
 {
-    height: 12px;
-    width: 50px;
-    margin-top: 4px;
+    height: 14px;
+    width: 60px;
+    margin-top: 5px;
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 14px;
     color: blue;
     float: right;
 }
 
 .top >div
 {
-    height: 12px;
-    width: 50px;
+    height: 14px;
+    width: 60px;
     margin-top: 4px;
     float: right;
 }
 
 .top >div >a
 {
-    height: 12px;
+    height: 14px;
     width: 100%;
-    margin-top: 4px;
+    margin-top: 5px;
     text-decoration: underline;
-    font-size: 12px;
+    font-size: 14px;
     color: blue;
 }
 
@@ -104,7 +105,7 @@ div#usermenu
 div#usermenu >a
 {
     text-decoration: none;
-    font-size: 12px;
+    font-size: 13px;
     display: block;
 }
 
@@ -120,4 +121,124 @@ div#usermenu >a:hover
     font-size: 16px;
     font-weight: bold;
     text-align: center;
+}
+
+
+.search
+{
+    margin-top: 150px;
+}
+
+.title
+{
+    color: blue;
+    margin-bottom: 20px;
+}
+
+.input
+{
+    font-size: 16px;
+    width: 300px;
+    height: 25px;
+    background-color: #cfebff;
+    border: 1px solid #01233f;
+    vertical-align: middle;
+}
+
+.button
+{
+    height: 27px;
+    width: 60px;
+}
+
+.describe
+{
+    font-size: 16px;
+    height: 25px;
+    width: 120px;
+    text-align: left;
+    float: left;
+    padding-top: 5px;
+}
+
+.upper
+{
+    margin-top: 30px;
+}
+
+.search_hint
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.search_result
+{
+/*    border: */
+    margin: 10px auto;
+    width: 500px;
+}
+
+.onebook
+{
+    margin: 10px auto;
+    width: 600px;
+    height: 60px;
+    text-align: left;
+    border: 1px solid gray;
+    padding: 10px;
+}
+
+.onebook >div
+{
+    float: left;
+    width: 300px;
+    height: 20px;
+    text-indent: 20px;
+}
+
+.onebook >div:firstchild span
+{
+    width: 200px;
+}
+
+.union
+{
+    margin: 10px auto;
+    width: 222px;
+}
+
+.short
+{
+    width: 100px;
+}
+
+.titletime
+{
+    width: 80px;
+}
+
+.all
+{
+    margin-top: 100px;
+}
+
+.double
+{
+    margin: auto 10px;
+}
+
+.mid
+{
+    width: 200px;
+}
+
+.midunion
+{
+    width: 305px;
+}
+
+.middes
+{
+    width: 100px;
 }

@@ -9,6 +9,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>图书管理系统</title>
     <link href="css/library.css" rel="stylesheet" type="text/css" />
+    <link href="css/book.css" rel="stylesheet" type="text/css" />
 </head>
     
 <body>
@@ -54,13 +55,13 @@
     ?>
 
     <?php
-        $sql = "SELECT bname, author, publisher, pubtime, cover FROM book WHERE bid = '{$_GET['bid']}'";
+        $sql = "SELECT bname, author, publisher, pubtime, cover, sumnum, bronum FROM book WHERE bid = '{$_GET['bid']}'";
         $result = $db->query($sql);
         $row = $result->fetch_assoc();
     ?>
     
-    <img src="images/cover/<?php echo $row['cover']; ?>" />
-    <table>
+    <img class="cover" src="images/cover/<?php echo $row['cover']; ?>" />
+    <table class="book">
         <tr>
             <td>书名：</td>
             <td><?php echo $row['bname']; ?></td>
@@ -77,6 +78,14 @@
             <td>出版时间：</td>
             <td><?php echo $row['pubtime']; ?></td>
         </tr>
+        <tr>
+            <td>馆藏副本：</td>
+            <td><?php echo $row['sumnum']; ?></td>
+        </tr>
+        <tr>
+            <td>已借出副本：</td>
+            <td><?php echo $row['bronum']; ?></td>
+        </tr>
     </table>
     
     <?php
@@ -86,15 +95,18 @@
         while ($row = $result->fetch_assoc())
         {
     ?>
-        <div>
-            <div><?php echo $row['account'] . ' : ' . $row['content']; ?></div>
-            <div><?php echo $row['time'] ?></div>
-            <?php
-                if (isset($_SESSION['level']) && (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $row['sid'])))
-                {
-                    echo "<a href='book.php?bid={$_GET['bid']}&sid={$row['sid']}&delete=" . md5($row['time']) . "'>删除</a>";
-                }
-            ?>
+        <div class="comment">
+            <div class="ccontent"><?php echo $row['content']; ?></div>
+            <div class="cfooter">
+                <?php
+                    if (isset($_SESSION['level']) && (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $row['sid'])))
+                    {
+                        echo "<a href='book.php?bid={$_GET['bid']}&sid={$row['sid']}&delete=" . md5($row['time']) . "'>删除</a>";
+                    }
+                ?>
+                <div><?php echo $row['time'] ?></div>
+                <div class="account"><?php echo $row['account'] ?></div>
+            </div>
         </div>
     <?php
         }
@@ -102,10 +114,10 @@
         include "closeMySQL.php";
     ?>
     
-    <form action="book.php?bid=<?php echo $_GET['bid']; ?>" method="post">
+    <form class="add_cmt" action="book.php?bid=<?php echo $_GET['bid']; ?>" method="post">
         <div>发表评论：</div>
-        <div><input type="text" name="content" <?php if (!isset($_SESSION['sid'])) echo 'value="请登陆后再发表评论！" readonly="readonly"'; ?> /></div>
-        <input type="submit" name="submitComment" value="发表" <?php if (!isset($_SESSION['sid'])) echo 'disabled="disabled"'; ?> />
+        <div><textarea class="cmt_input input" name="content" <?php if (!isset($_SESSION['sid'])) echo 'value="请登陆后再发表评论！" readonly="readonly"'; ?>></textarea></div>
+        <input class="button" type="submit" name="submitComment" value="发  表" <?php if (!isset($_SESSION['sid'])) echo 'disabled="disabled"'; ?> />
     </form>
 </body>
 </html>

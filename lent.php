@@ -23,18 +23,18 @@
         }
     ?>
     
-    <div>
+    <div class="all">
         <form name="bookForm" action="lent.php" method="post">
-            <div>
-                书籍编号：
-                <input type="text" name="bid" value="<?php if (isset($_POST['bid'])) echo $_POST['bid']; ?>" />
+            <div class="union">
+                <div class="describe">书籍编号：</div>
+                <input class="input short" type="text" name="bid" value="<?php if (isset($_POST['bid'])) echo $_POST['bid']; ?>" />
             </div>
-            <div>
-                借书人编号：
-                <input type="text" name="sid" value="<?php if (isset($_POST['sid'])) echo $_POST['sid']; ?>" />
+            <div class="union">
+                <div class="describe">借书人编号：</div>
+                <input class="input short" type="text" name="sid" value="<?php if (isset($_POST['sid'])) echo $_POST['sid']; ?>" />
             </div>
-            <input type="submit" name="submitLent" value="借  出" />
-            <input type="submit" name="submitReturn" value="还  回" />
+            <input class="button double" type="submit" name="submitLent" value="借  出" />
+            <input class="button double" type="submit" name="submitReturn" value="还  回" />
         </form>
     </div>
     
