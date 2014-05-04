@@ -6,7 +6,7 @@
         <a href="index.php">首页</a>
         
         <?php
-            if ($_SESSION['sid'][0] != 's')
+            if ($_SESSION['level'] > 0)
             {
                 echo '<a href="lent.php">借还书</a>';
                 echo '<a href="administrator.php">封号</a>';

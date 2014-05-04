@@ -19,13 +19,47 @@
     <?php
         include "useMySQL.php";
 
-        $sql = "SELECT bname, author, publisher, pubtime FROM book WHERE bid = '{$_GET['bid']}'";
+        if (isset($_POST['content']))
+        {
+            $sql = "SELECT titledate FROM user WHERE sid = '{$_SESSION['sid']}' AND (titledate IS NULL OR titledate < NOW())";
+            $result = $db->query($sql);
+            if ($result->num_rows > 0)
+            {
+                $sql = "INSERT INTO ucb VALUES ('{$_SESSION['sid']}', '{$_GET['bid']}', NOW(), '{$_POST['content']}')";
+                $db->query($sql);
+                echo "<script type='text/javascript'>alert('评论成功！');</script>";
+            }
+            else
+            {
+                echo "<script type='text/javascript'>alert('对不起，您已被封号，无法评论！');</script>";
+            }
+        }
+
+        if (isset($_GET['delete']))
+        {
+            $sql = "SELECT level FROM user WHERE sid = '{$_GET['sid']}'";
+            $result = $db->query($sql);
+            $row = $result->fetch_assoc();
+            if (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $_GET['sid']))
+            {
+                $sql = "DELETE FROM ucb WHERE sid = '{$_GET['sid']}' AND bid = '{$_GET['bid']}' AND MD5(time) = '{$_GET['delete']}'";
+                $db->query($sql);
+                echo "<script type='text/javascript'>alert('删除成功！');</script>";
+            }
+            else
+            {
+                echo "<script type='text/javascript'>alert('权限不足！');</script>";
+            }
+        }
+    ?>
+
+    <?php
+        $sql = "SELECT bname, author, publisher, pubtime, cover FROM book WHERE bid = '{$_GET['bid']}'";
         $result = $db->query($sql);
         $row = $result->fetch_assoc();
-
-        include "closeMySQL.php";
     ?>
     
+    <img src="images/cover/<?php echo $row['cover']; ?>" />
     <table>
         <tr>
             <td>书名：</td>
@@ -44,5 +78,34 @@
             <td><?php echo $row['pubtime']; ?></td>
         </tr>
     </table>
+    
+    <?php
+        $sql = "SELECT sid, account, level, time, content FROM ucb NATURAL JOIN user WHERE bid = '{$_GET['bid']}' ORDER BY time";
+        $result = $db->query($sql);
+
+        while ($row = $result->fetch_assoc())
+        {
+    ?>
+        <div>
+            <div><?php echo $row['account'] . ' : ' . $row['content']; ?></div>
+            <div><?php echo $row['time'] ?></div>
+            <?php
+                if (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $row['sid']))
+                {
+                    echo "<a href='book.php?bid={$_GET['bid']}&sid={$row['sid']}&delete=" . md5($row['time']) . "'>删除</a>";
+                }
+            ?>
+        </div>
+    <?php
+        }
+
+        include "closeMySQL.php";
+    ?>
+    
+    <form action="book.php?bid=<?php echo $_GET['bid']; ?>" method="post">
+        <div>发表评论：</div>
+        <div><input type="text" name="content" /></div>
+        <input type="submit" name="submitComment" value="发表" />
+    </form>
 </body>
 </html>

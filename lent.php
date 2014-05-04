@@ -27,11 +27,11 @@
         <form name="bookForm" action="lent.php" method="post">
             <div>
                 书籍编号：
-                <input type="text" name="bid" />
+                <input type="text" name="bid" value="<?php if (isset($_POST['bid'])) echo $_POST['bid']; ?>" />
             </div>
             <div>
                 借书人编号：
-                <input type="text" name="sid" />
+                <input type="text" name="sid" value="<?php if (isset($_POST['sid'])) echo $_POST['sid']; ?>" />
             </div>
             <input type="submit" name="submitLent" value="借  出" />
             <input type="submit" name="submitReturn" value="还  回" />
@@ -54,7 +54,7 @@
                     }
                     else
                     {
-                        $sql = "SELECT bbn, cbn, tlw FROM user NATURAL JOIN power WHERE sid = '{$_POST['sid']}'";
+                        $sql = "SELECT bbn, cbn, tlw FROM user NATURAL JOIN power WHERE sid = '{$_POST['sid']}' AND (titledate IS NULL OR titledate < NOW())";
                         $result = $db->query($sql);
                         if ($staff = $result->fetch_assoc())
                         {
@@ -84,7 +84,7 @@
                         }
                         else
                         {
-                            echo "alert('没有这个人！');";
+                            echo "alert('没有这个人或已被封号！');";
                         }
                     }
                 }
