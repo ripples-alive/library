@@ -52,7 +52,7 @@
             <span id="time">
             </span>
             <span>
-                秒后自动跳转到退出前页面!
+                秒后自动跳转到首页!
             </span>
         </div>
     </div>

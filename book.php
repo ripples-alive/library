@@ -40,7 +40,7 @@
             $sql = "SELECT level FROM user WHERE sid = '{$_GET['sid']}'";
             $result = $db->query($sql);
             $row = $result->fetch_assoc();
-            if (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $_GET['sid']))
+            if (isset($_SESSION['level']) && (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $_GET['sid'])))
             {
                 $sql = "DELETE FROM ucb WHERE sid = '{$_GET['sid']}' AND bid = '{$_GET['bid']}' AND MD5(time) = '{$_GET['delete']}'";
                 $db->query($sql);
@@ -90,7 +90,7 @@
             <div><?php echo $row['account'] . ' : ' . $row['content']; ?></div>
             <div><?php echo $row['time'] ?></div>
             <?php
-                if (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $row['sid']))
+                if (isset($_SESSION['level']) && (($_SESSION['level'] > $row['level']) || ($_SESSION['sid'] == $row['sid'])))
                 {
                     echo "<a href='book.php?bid={$_GET['bid']}&sid={$row['sid']}&delete=" . md5($row['time']) . "'>删除</a>";
                 }
@@ -104,8 +104,8 @@
     
     <form action="book.php?bid=<?php echo $_GET['bid']; ?>" method="post">
         <div>发表评论：</div>
-        <div><input type="text" name="content" /></div>
-        <input type="submit" name="submitComment" value="发表" />
+        <div><input type="text" name="content" <?php if (!isset($_SESSION['sid'])) echo 'value="请登陆后再发表评论！" readonly="readonly"'; ?> /></div>
+        <input type="submit" name="submitComment" value="发表" <?php if (!isset($_SESSION['sid'])) echo 'disabled="disabled"'; ?> />
     </form>
 </body>
 </html>

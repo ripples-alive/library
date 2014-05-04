@@ -103,7 +103,7 @@
                     <span id="time">
                     </span>
                     <span>
-                        秒后自动跳转到登陆前页面!
+                        秒后自动跳转到首页!
                     </span>
                 </div>
             </div>
