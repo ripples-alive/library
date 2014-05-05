@@ -9,11 +9,19 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>图书管理系统</title>
     <link href="css/library.css" rel="stylesheet" type="text/css" />
+    <link href="css/table.css" rel="stylesheet" type="text/css" />
 </head>
     
 <body>
     <?php
         include "top.php";
+    ?>
+    
+    <?php
+        if (!isset($_SESSION['sid']))
+        {
+            die("请先<a href='login.php'>登陆</a>！");
+        }
     ?>
     
     <?php
@@ -111,7 +119,8 @@
             $sql = "SELECT bid, bname, author, publisher, pubtime, type, renew, deadline FROM ubb NATURAL JOIN book WHERE sid = '{$_SESSION['sid']}'";
             $result = $db->query($sql);
         ?>
-            <table>
+            <h2 class="tablehead">已借书籍</h2>
+            <table class="hovertable">
                 <tr>
                     <th>书号</th>
                     <th>书名</th>
@@ -126,7 +135,7 @@
             while ($row = $result->fetch_assoc())
             {
         ?>
-                <tr>
+                <tr onmouseover="this.style.backgroundColor='#ffff66';" onmouseout="this.style.backgroundColor='#d4e3e5';">
                     <td><?php echo $row['bid']; ?></td>
                     <td><?php echo $row['bname']; ?></td>
                     <td><?php echo $row['author']; ?></td>
@@ -166,27 +175,30 @@
         
                 include 'closeMysql.php';
         
-                echo $row['account'] . "的帐号";
+                echo "<h3>" . $row['account'] . "的帐号</h3>";
             ?>
         
 <!--        <form name="change" action="" method="post">-->
             <div class="info">
-                ID : <?php echo $row['sid']; ?>
+                <div>ID : </div>
+                <?php echo $row['sid']; ?>
             </div>
             
             <div class="info">
-                真实姓名 : <?php echo $row['sname']; ?>
+                <div>真实姓名 : </div>
+                <?php echo $row['sname']; ?>
 <!--                <input type="text" name="realname" />-->
             </div>
             
             <div class="info">
-                E-mail : <?php echo $row['emailadd']; ?>
+                <div>E-mail : </div>
+                <?php echo $row['emailadd']; ?>
 <!--                <input type="text" name="email" />-->
             </div>
             
             <div class="info">
-                已借书数 : 
-               <?php
+                <div>已借书数 : </div>
+                <?php
                     if ($row['bbn'] > 0)
                     {
                         echo '<a href="user.php?func=3">' . $row['bbn'] . '</a>';

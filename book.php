@@ -115,7 +115,7 @@
     ?>
     
     <form class="add_cmt" action="book.php?bid=<?php echo $_GET['bid']; ?>" method="post">
-        <div>发表评论：</div>
+        <div><strong>发表评论：</strong></div>
         <div><textarea class="cmt_input input" name="content" <?php if (!isset($_SESSION['sid'])) echo 'value="请登陆后再发表评论！" readonly="readonly"'; ?>></textarea></div>
         <input class="button" type="submit" name="submitComment" value="发  表" <?php if (!isset($_SESSION['sid'])) echo 'disabled="disabled"'; ?> />
     </form>

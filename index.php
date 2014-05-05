@@ -27,7 +27,7 @@
     <?php
         if (isset($_POST['submitSearch']))
         {
-            echo "<div class='search_hint'>搜索 {$_POST['content']} 的结果：</div>";
+            echo "<div class='search_hint'>搜索 <strong>{$_POST['content']}</strong> 的结果：</div>";
 
             include 'useMysql.php';
     
