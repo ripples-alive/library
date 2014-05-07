@@ -9,6 +9,34 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>图书管理系统</title>
     <link href="css/library.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="js/library.js"></script>
+    <script type="text/javascript">
+        function formValid(form)
+        {
+            with (form)
+            {
+                if (!strValid(user.value))
+                {
+                    alert("用户名不合法！");
+                    user.focus();
+                    return false;
+                }
+                if (!strValid(pswd.value))
+                {
+                    alert("密码不合法！");
+                    pswd.focus();
+                    return false;
+                }
+                if (pswd.value != pswdConfirm.value)
+                {
+                    alert("两次密码不一致！");
+                    pswd.focus();
+                    return false;
+                }
+            }
+            return true;
+        }
+    </script>
 </head>
     
 <body>
@@ -72,7 +100,7 @@
     ?>
     
     <div class="all">
-        <form name="register" action="assign.php" onsubmit="return true;/*formValid(this)*/" method="post">
+        <form name="register" action="assign.php" onsubmit="return formValid(this)" method="post">
             <div class="union assignunion">
                 <div class="describe assigndes">用户名：</div>
                 <input class="input assign" type="text" name="user" value="<?php if (isset($_POST['user'])) {echo $_POST['user'];} ?>" />

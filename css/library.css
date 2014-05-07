@@ -290,3 +290,10 @@ div#usermenu >a:hover
 {
     width: 110px;
 }
+
+.pswd_wrong
+{
+    color: red;
+    font-size: 14px;
+    margin: 5px auto;
+}

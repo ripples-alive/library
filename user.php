@@ -63,8 +63,30 @@
             if (!isset($_POST['submitChange']) || isset($change_error))
             {
         ?>
+            <script type="text/javascript" src="js/library.js"></script>
+            <script type="text/javascript">
+                function formValid(form)
+                {
+                    with (form)
+                    {
+                        if (!strValid(pswd.value))
+                        {
+                            alert("新密码不合法！");
+                            pswd.focus();
+                            return false;
+                        }
+                        if (pswd.value != pswdConfirm.value)
+                        {
+                            alert("两次密码不一致！");
+                            pswd.focus();
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            </script>
     
-            <form class="all" name="input" action="user.php?func=2" method="post">
+            <form class="all" name="input" action="user.php?func=2" onsubmit="return formValid(this)" method="post">
                 <h3>修改<?php echo $row['account']; ?>的密码</h3>
                 <div class="union midunion">
                     <div class="describe middes">当前密码：</div>
@@ -81,13 +103,16 @@
                     <input class="input mid" type="password" name="pswdConfirm" />
                 </div>
                 
+                <?php
+                    if (isset($change_error))
+                    {
+                        echo '<div class="pswd_wrong">当前密码错误！</div>';
+                    }
+                ?>
+                
                 <input class="button submit" type="submit" name="submitChange" value="确  认" />
             </form>
         <?php
-            }
-            if (isset($change_error))
-            {
-                echo '<div>当前密码错误！</div>';
             }
         ?>
     <?php

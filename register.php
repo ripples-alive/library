@@ -18,13 +18,19 @@
             {
                 if (!strValid(user.value))
                 {
-                    alert("请输入用户名！");
+                    alert("用户名不合法！");
                     user.focus();
                     return false;
                 }
                 if (!strValid(pswd.value))
                 {
-                    alert("请输入密码！");
+                    alert("密码不合法！");
+                    pswd.focus();
+                    return false;
+                }
+                if (pswd.value != pswdConfirm.value)
+                {
+                    alert("两次密码不一致！");
                     pswd.focus();
                     return false;
                 }
