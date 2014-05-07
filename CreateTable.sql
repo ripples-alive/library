@@ -2,6 +2,7 @@ drop table Power;
 create table Power
 (
     Level int not null,
+    PName varchar(10),
     CBN int, #能借书数
     TLW int, #借阅期限权值
     Cnt int,

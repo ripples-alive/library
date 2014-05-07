@@ -19,6 +19,24 @@
     <div class="search <?php if (isset($_POST['submitSearch'])) echo 'upper'; ?>">
         <h1 class="title">图书管理系统</h1>
         <form name="search" action="index.php" method="post">
+            <select class="input searchsel" name="type">
+                <option id="bname" value="bname">按书名</option>
+                <option id="bid" value="bid">按ISBN</option>
+                <option id="author" value="author">按作者</option>
+                <option id="type" value="type">按分类</option>
+                <option id="publisher" value="publisher">按出版社</option>
+                <option id="pubtime" value="pubtime">按出版时间</option>
+                <?php
+                    if ($_POST['type'])
+                    {
+                ?>
+                    <script type="text/javascript">
+                        document.getElementById("<?php echo $_POST['type']; ?>").selected = true;
+                    </script>
+                <?php
+                    }
+                ?>
+            </select>
             <input class="input" type="text" name="content" value="<?php if (isset($_POST['content'])) echo $_POST['content']; ?>" />
             <input class="button submit" type="submit" name="submitSearch" value="搜  索" />
         </form>
@@ -31,7 +49,31 @@
 
             include 'useMysql.php';
     
-            $sql = "SELECT bid, bname, author, publisher, pubtime, sumnum, bronum FROM book WHERE bname LIKE '%{$_POST['content']}%'";
+            $sql = "SELECT bid, bname, author, publisher, pubtime, sumnum, bronum FROM book WHERE ";
+            if ($_POST['type'] == 'bname')
+            {
+                $sql .= "bname LIKE '%{$_POST['content']}%'";
+            }
+            else if ($_POST['type'] == 'bid')
+            {
+                $sql .= "bid LIKE '%{$_POST['content']}%'";
+            }
+            else if ($_POST['type'] == 'author')
+            {
+                $sql .= "author LIKE '%{$_POST['content']}%'";
+            }
+            else if ($_POST['type'] == 'type')
+            {
+                $sql .= "type LIKE '%{$_POST['content']}%'";
+            }
+            else if ($_POST['type'] == 'publisher')
+            {
+                $sql .= "publisher LIKE '%{$_POST['content']}%'";
+            }
+            else if ($_POST['type'] == 'pubtime')
+            {
+                $sql .= "pubtime LIKE '%{$_POST['content']}%'";
+            }
             $result = $db->query($sql);
             while ($row = $result->fetch_assoc())
             {

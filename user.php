@@ -169,7 +169,7 @@
             <?php
                 include 'useMysql.php';
                 
-                $sql = "SELECT sid, account, sname, emailadd, bbn, level FROM user WHERE sid = '{$_SESSION['sid']}'";
+                $sql = "SELECT sid, account, sname, emailadd, bbn, level, pname FROM user NATURAL JOIN power WHERE sid = '{$_SESSION['sid']}'";
                 $result = $db->query($sql);
                 $row = $result->fetch_assoc();
         
@@ -182,6 +182,11 @@
             <div class="info">
                 <div>ID : </div>
                 <?php echo $row['sid']; ?>
+            </div>
+            
+            <div class="info">
+                <div>用户类型 : </div>
+                <?php echo $row['pname']; ?>
             </div>
             
             <div class="info">

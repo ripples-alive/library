@@ -17,7 +17,7 @@
     ?>
     
     <?php
-        if ($_SESSION['level'] == 0)
+        if (!isset($_SESSION['level']) || ($_SESSION['level'] == 0))
         {
             die('没有权限！');
         }

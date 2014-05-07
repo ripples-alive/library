@@ -8,6 +8,10 @@
         <?php
             if ($_SESSION['level'] > 0)
             {
+                if ($_SESSION['level'] > 1)
+                {
+                    echo '<a href="assign.php">分配帐号</a>';
+                }
                 echo '<a href="lent.php">借还书</a>';
                 echo '<a href="administrator.php">封号</a>';
             }
