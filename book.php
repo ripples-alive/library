@@ -55,7 +55,7 @@
     ?>
 
     <?php
-        $sql = "SELECT bname, author, publisher, pubtime, cover, sumnum, bronum FROM book WHERE bid = '{$_GET['bid']}'";
+        $sql = "SELECT bid, bname, author, publisher, pubtime, location, cover, sumnum, bronum FROM book WHERE bid = '{$_GET['bid']}'";
         $result = $db->query($sql);
         $row = $result->fetch_assoc();
     ?>
@@ -77,6 +77,14 @@
         <tr>
             <td>出版时间：</td>
             <td><?php echo $row['pubtime']; ?></td>
+        </tr>
+        <tr>
+            <td>ISBN：</td>
+            <td><?php echo $row['bid']; ?></td>
+        </tr>
+        <tr>
+            <td>索书号：</td>
+            <td><?php echo $row['location']; ?></td>
         </tr>
         <tr>
             <td>馆藏副本：</td>

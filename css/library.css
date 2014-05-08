@@ -91,26 +91,31 @@ body
     color: blue;
 }
 
-.top >div:hover div#usermenu
+.top >div:hover div#usermenu, .top >div:hover div#bookmenu
 {
     display: block;
 }
 
-div#usermenu
+div#usermenu, div#bookmenu
 {
 /*    margin-top: 1px;*/
     border: 1px solid #a9c6c9;
     display: none;
 }
 
-div#usermenu >a
+div#alterbook
+{
+    padding-top: 1px;
+}
+
+div#usermenu >a, div#bookmenu >a
 {
     text-decoration: none;
     font-size: 13px;
     display: block;
 }
 
-div#usermenu >a:hover
+div#usermenu >a:hover, div#bookmenu >a:hover
 {
     background-color: #EEEEEE;
 }
@@ -296,4 +301,24 @@ div#usermenu >a:hover
     color: red;
     font-size: 14px;
     margin: 5px auto;
+}
+
+.alterunion
+{
+    width: 285px;
+}
+
+.alterdes
+{
+    width: 80px;
+}
+
+.alterinput
+{
+    width: 200px;
+}
+
+.alterdate
+{
+    width: 180px;
 }

@@ -101,6 +101,23 @@
                 <span>，已借出副本：</span>
                 <span><?php echo $row['bronum']; ?></span>
             </div>
+            <div>
+                <span>历史借阅人次：</span>
+                <span>
+                    <?php
+                        if (isset($_SESSION['level']) && ($_SESSION['level'] >= 2))
+                        {
+                            echo '<a href="history.php?bid=' . $row['bid'] . '" target="_blank">';
+                        }
+                        $sql = "SELECT COUNT(*) FROM history WHERE bid = '{$row['bid']}'";
+                        echo $db->query($sql)->fetch_row()[0];
+                        if (isset($_SESSION['level']) && ($_SESSION['level'] >= 2))
+                        {
+                            echo '</a>';
+                        }
+                    ?>
+                </span>
+            </div>
         </div>
 <!--
         <table class="search_result" border="1">

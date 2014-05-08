@@ -10,7 +10,25 @@
             {
                 if ($_SESSION['level'] > 1)
                 {
-                    echo '<a href="assign.php">分配帐号</a>';
+        ?>
+                    <a href="assign.php">分配帐号</a>
+                    <div id="alterbook">
+                        <a href="alterbook.php?func=1">
+                            修改图书
+                        </a>
+                        <div id="bookmenu">
+                            <a href="alterbook.php?func=1">
+                                上架新书
+                            </a>
+                            <a href="alterbook.php?func=2">
+                                调整数量
+                            </a>
+                            <a href="alterbook.php?func=3">
+                                下架书籍
+                            </a>
+                        </div>
+                    </div>
+        <?php
                 }
                 echo '<a href="lent.php">借还书</a>';
                 echo '<a href="administrator.php">封号</a>';
